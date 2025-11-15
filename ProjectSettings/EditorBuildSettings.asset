@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7d3cfcce0ca13d5587d050485347f078f0293308f1f04e4db7f55d6fd19785d2
-size 731
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 296472f48e120f5489bceab6e2badd51
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: aae1ef92a681d9941a0048a7ced17b6b
+  - enabled: 1
+    path: Assets/Scenes/Level4.unity
+    guid: c4a92b13259e9804f886e8f38b05f1ba
+  - enabled: 1
+    path: Assets/Scenes/FinalLevel.unity
+    guid: 55c9260a81123a74c9214e0878990461
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 6f00d8b85137fb34d9bc2f09ade2901d, type: 2}
+  m_UseUCBPForAssetBundles: 0
