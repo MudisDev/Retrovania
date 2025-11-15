@@ -1,0 +1,5 @@
+C:/Users/Martin/Desarrollo/Unity/Retrovania/.utmp/RelWithDebInfo/2af24316/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Martin/Desarrollo/Unity/Retrovania/.utmp/RelWithDebInfo/2af24316/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+C:/Users/Martin/Desarrollo/Unity/Retrovania/.utmp/RelWithDebInfo/2af24316/armeabi-v7a/FramePacing/CMakeFiles/swappywrapper.dir
+C:/Users/Martin/Desarrollo/Unity/Retrovania/.utmp/RelWithDebInfo/2af24316/armeabi-v7a/FramePacing/CMakeFiles/edit_cache.dir
+C:/Users/Martin/Desarrollo/Unity/Retrovania/.utmp/RelWithDebInfo/2af24316/armeabi-v7a/FramePacing/CMakeFiles/rebuild_cache.dir
