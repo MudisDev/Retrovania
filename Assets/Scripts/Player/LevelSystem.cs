@@ -14,6 +14,8 @@ public class LevelSystem : MonoBehaviour
     private int playerTotalExp = 0;
     private int nextLevel;
 
+    private int playerMoney;
+
 
     [SerializeField] float lifePoints = 100;
 
@@ -39,12 +41,7 @@ public class LevelSystem : MonoBehaviour
         this.LoadPlayerLife(DataStorage.sharedInstance.LoadPlayerPointsLife());
         this.currentPlayerDamage = DataStorage.sharedInstance.GetPlayerDamage();
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        this.playerMoney = DataStorage.sharedInstance.GetPlayerMoney();
     }
 
     public void SetPlayerTotalExp(int exp)
@@ -158,5 +155,20 @@ public class LevelSystem : MonoBehaviour
     public int GetMaxPlayerLife()
     {
         return this.maxPlayerLife;
+    }
+
+    public void SetPlayerMoney(int money)
+    {
+        Debug.Log($"SetPlayerMoney called with money = {money}");
+        Debug.Log($"PlayerMoney before update = {this.playerMoney}");
+
+        this.playerMoney += money;
+
+        Debug.Log($"PlayerMoney after update = {this.playerMoney}");
+    }
+
+    public int GetPlayerMoney()
+    {
+        return this.playerMoney;
     }
 }

@@ -47,39 +47,7 @@ public class PlayerController : MonoBehaviour
 
     public void Start()
     {
-        if (PlayerAnimationController.sharedInstance.GetMirrorAnimation())
-            FlipRigidbody(false, this.fixFlip);
-        else
-            FlipRigidbody(true, 0f);
-
-        int numScene = ChangeScene.sharedInstance.GetNumberCurrentScene();
-        Vector2 playerPosition = DataStorage.sharedInstance.GetPlayerPosition(numScene);
-        
-        if (playerPosition == Vector2.zero)
-            this.transform.position = this.startPosition;
-        else
-            this.transform.position = playerPosition;
-
-        
-
-        if (PlayerAnimationController.sharedInstance.GetMirrorAnimation())
-        {
-            rgbd.transform.localScale = new Vector3(-1, 1, 1);
-            //El .4f representa un ajuste para que el player este centrado en la puerta.
-            rgbd.transform.localPosition = new Vector3((rgbd.transform.localPosition.x - (this.fixFlip + .4f)), rgbd.transform.localPosition.y, rgbd.transform.localPosition.z);
-        }
-
-        
-
-        this.attackCollider.enabled = false;
-
-        if (GameManager.sharedInstance.currentGameState == GameState.inGame)
-            this.isAlive = true;
-
-        attackAnimationStatus = false;
-        this.afterAttack = false;
-        this.afterJump = false;
-        this.blockedFlip = false;
+        InitialConfiguration();
     }
 
     void Update()
@@ -98,7 +66,46 @@ public class PlayerController : MonoBehaviour
                 this.blockedFlip = false;
 
             //Debug.Log($"BlockedFlip {this.blockedFlip}");
+            Debug.Log(InputManager.sharedInstance.GetMovementY().y);
+
         }
+    }
+
+    private void InitialConfiguration()
+    {
+        if (PlayerAnimationController.sharedInstance.GetMirrorAnimation())
+            FlipRigidbody(false, this.fixFlip);
+        else
+            FlipRigidbody(true, 0f);
+
+        int numScene = ChangeScene.sharedInstance.GetNumberCurrentScene();
+        Vector2 playerPosition = DataStorage.sharedInstance.GetPlayerPosition(numScene);
+
+        if (playerPosition == Vector2.zero)
+            this.transform.position = this.startPosition;
+        else
+            this.transform.position = playerPosition;
+
+
+
+        if (PlayerAnimationController.sharedInstance.GetMirrorAnimation())
+        {
+            rgbd.transform.localScale = new Vector3(-1, 1, 1);
+            //El .4f representa un ajuste para que el player este centrado en la puerta.
+            rgbd.transform.localPosition = new Vector3((rgbd.transform.localPosition.x - (this.fixFlip + .4f)), rgbd.transform.localPosition.y, rgbd.transform.localPosition.z);
+        }
+
+
+
+        this.attackCollider.enabled = false;
+
+        if (GameManager.sharedInstance.currentGameState == GameState.inGame)
+            this.isAlive = true;
+
+        attackAnimationStatus = false;
+        this.afterAttack = false;
+        this.afterJump = false;
+        this.blockedFlip = false;
     }
 
     private void FixedUpdate()
@@ -109,7 +116,7 @@ public class PlayerController : MonoBehaviour
 
     public bool GetIsFalling()
     {
-        return !GetIsTouchingTheGround() && rgbd.velocity.y <= 0;
+        return !GetIsTouchingTheGround() && rgbd.linearVelocity.y <= 0;
     }
 
     public bool GetIsMoving()
@@ -145,10 +152,10 @@ public class PlayerController : MonoBehaviour
     void Movement()
     {
         if (this.attackAnimationStatus && this.GetIsTouchingTheGround())
-            rgbd.velocity = new Vector2(0f, rgbd.velocity.y);
+            rgbd.linearVelocity = new Vector2(0f, rgbd.linearVelocity.y);
         else
         {
-            Vector2 moveInput = InputManager.sharedInstance.GetMovement();
+            Vector2 moveInput = InputManager.sharedInstance.GetMovementX();
             float direction = moveInput.x;
             float moveX = 0f;
 
@@ -156,8 +163,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (PlayerAnimationController.sharedInstance.GetMirrorAnimation())
                 {
-                    PlayerAnimationController.sharedInstance.SetMirrorAnimation(false);                              
-                        FlipRigidbody(true, this.fixFlip);
+                    PlayerAnimationController.sharedInstance.SetMirrorAnimation(false);
+                    FlipRigidbody(true, this.fixFlip);
                 }
                 moveX = runningSpeed;
             }
@@ -165,8 +172,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (!PlayerAnimationController.sharedInstance.GetMirrorAnimation())
                 {
-                    PlayerAnimationController.sharedInstance.SetMirrorAnimation(true);                
-                        FlipRigidbody(false, this.fixFlip);
+                    PlayerAnimationController.sharedInstance.SetMirrorAnimation(true);
+                    FlipRigidbody(false, this.fixFlip);
                 }
                 moveX = -runningSpeed;
             }
@@ -175,34 +182,41 @@ public class PlayerController : MonoBehaviour
 
             this.isMoving = moveX != 0 ? true : false;
 
-            rgbd.velocity = new Vector2(moveX, rgbd.velocity.y);
+            rgbd.linearVelocity = new Vector2(moveX, rgbd.linearVelocity.y);
         }
     }
 
-    
+
 
     private void FlipRigidbody(bool flip, float value)
     {
-        if (!this.blockedFlip) 
+        if (this.blockedFlip)
+            return;
+
+        if (flip)
         {
-            if (flip)
-            {
-                rgbd.transform.localScale = new Vector3(1, 1, 1);
-                rgbd.transform.localPosition = new Vector3((rgbd.transform.localPosition.x + value), rgbd.transform.localPosition.y, rgbd.transform.localPosition.z);
-            }
-            else
-            {
-                rgbd.transform.localScale = new Vector3(-1, 1, 1);
-                rgbd.transform.localPosition = new Vector3((rgbd.transform.localPosition.x - value), rgbd.transform.localPosition.y, rgbd.transform.localPosition.z);
-            }
+            rgbd.transform.localScale = new Vector3(1, 1, 1);
+            rgbd.transform.localPosition = new Vector3((rgbd.transform.localPosition.x + value), rgbd.transform.localPosition.y, rgbd.transform.localPosition.z);
         }
+        else
+        {
+            rgbd.transform.localScale = new Vector3(-1, 1, 1);
+            rgbd.transform.localPosition = new Vector3((rgbd.transform.localPosition.x - value), rgbd.transform.localPosition.y, rgbd.transform.localPosition.z);
+        }
+
     }
 
     public void Jump()
     {
-        rgbd.velocity = new Vector2(rgbd.velocity.x, 0f);
-        rgbd.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        SetAfterJump(true);
+        //Vector2 movY = InputManager.sharedInstance.GetMovementY();
+        float ejeY = InputManager.sharedInstance.GetMovementY().y;
+        if (ejeY >= 0)
+        {
+            rgbd.linearVelocity = new Vector2(rgbd.linearVelocity.x, 0f);
+            rgbd.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            SetAfterJump(true);
+        }
+
     }
 
     public IEnumerator Kill()
@@ -256,15 +270,16 @@ public class PlayerController : MonoBehaviour
 
     public void AttackAnimationStatus(bool status)
     {
-        if (!status) { 
+        if (!status)
+        {
             this.isAttacking = false;
             this.afterAttack = true;
             StartCoroutine(SetAfterAttack());
         }
         this.attackAnimationStatus = status;
-        
+
     }
-    
+
 
     public bool GetAfterAttack()
     {
@@ -276,31 +291,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForFixedUpdate();
         this.afterAttack = false;
 
-        //FixFlip();
-
     }
-
-    /*
-    void FixFlip()
-    {
-        bool mirror = PlayerAnimationController.sharedInstance.GetMirrorAnimation();
-        Vector2 moveInput = InputManager.sharedInstance.GetMovement();
-        float direction = moveInput.x;
-
-        //si mirror true player mira izquierda
-
-        //dir falso player va izquierda, true va derecha
-
-        bool dir = direction > 0 ? true : false;
-
-        if(mirror && !dir )
-            FlipRigidbody(true, this.fixFlip);
-        else if(!mirror && dir)
-            FlipRigidbody(false, this.fixFlip);
-
- 
-    }
-    */
 
     public float GetCurrentPlayerPosition()
     {
