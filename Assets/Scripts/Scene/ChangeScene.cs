@@ -18,23 +18,42 @@ public class ChangeScene : MonoBehaviour
     private bool knockingDoor;
     private float exitPosition;
 
+    private bool canChangeScene = false;
+
     private void Awake()
     {
         sharedInstance = this;
         this.exitPosition = this.gameObject.transform.position.x + this.fixExitPosition.x;
     }
 
+    public IEnumerator CoroutineChangeScene()
+    {
+        yield return new WaitForSeconds(0.5f);
+        this.canChangeScene = true;
+
+
+    }
+
     private void Update()
     {
         if (GameManager.sharedInstance.currentGameState == GameState.inGame)
-            if (this.knockingDoor && InputManager.sharedInstance.GetActionButton() && PlayerController.sharedInstance.GetIsTouchingTheGround())
+        {
+
+            if (!this.canChangeScene)
+            {
+                StartCoroutine(CoroutineChangeScene());
+            }
+
+            if (this.knockingDoor && InputManager.sharedInstance.GetActionButton() && PlayerController.sharedInstance.GetIsTouchingTheGround() && this.canChangeScene)
                 ChangeSceneNow();
+
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) 
-        { 
+        if (collision.CompareTag("Player"))
+        {
             this.knockingDoor = true;
             TouchUIController.sharedInstance.SetActionButton(true);
         }
@@ -43,7 +62,7 @@ public class ChangeScene : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        { 
+        {
             this.knockingDoor = false;
             TouchUIController.sharedInstance.SetActionButton(false);
         }
