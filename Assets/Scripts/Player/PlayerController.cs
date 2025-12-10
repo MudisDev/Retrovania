@@ -163,8 +163,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (PlayerAnimationController.sharedInstance.GetMirrorAnimation())
                 {
-                    PlayerAnimationController.sharedInstance.SetMirrorAnimation(false);
-                    FlipRigidbody(true, this.fixFlip);
+                    if (!this.attackAnimationStatus)
+                    {
+                        PlayerAnimationController.sharedInstance.SetMirrorAnimation(false);
+                        FlipRigidbody(true, this.fixFlip);
+
+                    }
                 }
                 moveX = runningSpeed;
             }
@@ -172,8 +176,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (!PlayerAnimationController.sharedInstance.GetMirrorAnimation())
                 {
-                    PlayerAnimationController.sharedInstance.SetMirrorAnimation(true);
-                    FlipRigidbody(false, this.fixFlip);
+                    if (!this.attackAnimationStatus)
+                    {
+
+                        PlayerAnimationController.sharedInstance.SetMirrorAnimation(true);
+                        FlipRigidbody(false, this.fixFlip);
+                    }
                 }
                 moveX = -runningSpeed;
             }
