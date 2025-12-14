@@ -136,4 +136,9 @@ public class ChangeScene : MonoBehaviour
 
         DataStorage.sharedInstance.SetPlayerMoney(LevelSystem.sharedInstance.GetPlayerMoney());
     }
+
+    public bool GetCanChangeScene()
+    {
+        return this.canChangeScene;
+    }
 }

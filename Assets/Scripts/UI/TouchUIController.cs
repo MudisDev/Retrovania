@@ -36,15 +36,7 @@ public class TouchUIController : MonoBehaviour
             Color attackPressed;
             ColorUtility.TryParseHtmlString("#9E0F20", out attackPressed);
             this.attackButton.color = attackPressed;
-            /*  
 
-             
-
-             Color movePressed;
-             ColorUtility.TryParseHtmlString("#347C26", out movePressed);
-
-             Color actionPressed;
-             ColorUtility.TryParseHtmlString("#879326", out actionPressed); */
         }
         else
             //this.attackButton.enabled = true;
@@ -93,6 +85,15 @@ public class TouchUIController : MonoBehaviour
         }
         else
             leftButton.color = Color.white;
+
+
+        /* if (!ChangeScene.sharedInstance.GetCanChangeScene())
+        {
+            Color actionPressed;
+            ColorUtility.TryParseHtmlString("#879326", out actionPressed);
+            actionButton.color = actionPressed;
+        }
+        else actionButton.color = Color.white; */
 
     }
     public void SetActionButton(bool status)

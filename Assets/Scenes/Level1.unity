@@ -1281,6 +1281,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 19.880753
       objectReference: {fileID: 0}
+    - target: {fileID: 4613399848136030458, guid: 798234a33113eab4088ccde600e451d3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6153101483228212721, guid: 798234a33113eab4088ccde600e451d3, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -2540,10 +2544,6 @@ PrefabInstance:
     - target: {fileID: 4472717892086031724, guid: 51a50769c7fa96748b4ade3fd7c4915e, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4474815598828567062, guid: 51a50769c7fa96748b4ade3fd7c4915e, type: 3}
-      propertyPath: m_RootOrder
-      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4474815598828567062, guid: 51a50769c7fa96748b4ade3fd7c4915e, type: 3}
       propertyPath: m_LocalPosition.x
