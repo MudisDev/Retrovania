@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
                 this.blockedFlip = false;
 
             //Debug.Log($"BlockedFlip {this.blockedFlip}");
-            Debug.Log(InputManager.sharedInstance.GetMovementY().y);
+            //Debug.Log(InputManager.sharedInstance.GetMovementY().y);
 
         }
     }

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 294454144}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.34, y: -1.64, z: 0}
+  m_LocalPosition: {x: -1.325, y: -1.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -202,7 +202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 882386889}
   - component: {fileID: 882386890}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: colliderNA
   m_TagString: NoPlayerAttack
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1449300790}
   - component: {fileID: 1449300791}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: attackCollider
   m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ Transform:
   m_GameObject: {fileID: 2020957823}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.12, y: -1.64, z: 0}
+  m_LocalPosition: {x: 0.09, y: -1.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -411,7 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7429197485884925766}
   - component: {fileID: 8500981114530394162}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: feetCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,8 +467,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.6178391, y: -1.6025743}
-  m_Size: {x: 1.4330331, y: 0.16159417}
+  m_Offset: {x: -0.6178391, y: -1.6281935}
+  m_Size: {x: 1.4330331, y: 0.11035587}
   m_Direction: 1
 --- !u!1 &4472717892086031724
 GameObject:
@@ -609,7 +609,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.6150172, y: -0.36310065}
+  m_Offset: {x: -0.6091678, y: -0.36310065}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -619,5 +619,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.4685845, y: 2.604797}
+  m_Size: {x: 1.363297, y: 2.604797}
   m_EdgeRadius: 0

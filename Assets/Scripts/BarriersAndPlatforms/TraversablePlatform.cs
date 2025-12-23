@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,11 +19,15 @@ public class TraversablePlatform : MonoBehaviour
     private void Awake()
     {
         this.platformEffector2D = GetComponent<PlatformEffector2D>();
+        //this.capsuleColliderPlayer = GetComponentInChildren<CapsuleCollider2D>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        /* if(this.capsuleColliderPlayer == null)
+        {
+            Debug.LogWarning("capsuleColliderPlayer en TraversablePlatform nulo");
+        } */
     }
 
     // Update is called once per frame
@@ -51,7 +56,8 @@ public class TraversablePlatform : MonoBehaviour
             this.collisionPlayer = collision;
 
             boxColliderPlayer = collisionPlayer.gameObject.GetComponent<BoxCollider2D>();
-            capsuleColliderPlayer = collisionPlayer.gameObject.GetComponent<CapsuleCollider2D>();
+            //capsuleColliderPlayer = collisionPlayer.gameObject.GetComponent<CapsuleCollider2D>();
+            capsuleColliderPlayer = collisionPlayer.GetComponentInChildren<CapsuleCollider2D>();
 
             //if  (PlayerController.sharedInstance.GetIsAttacking() == true || InputManager.sharedInstance.GetAttackButton() == true || (Input.GetKeyDown(KeyCode.DownArrow) ))
             if(this.isDropping)
