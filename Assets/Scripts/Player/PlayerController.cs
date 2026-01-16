@@ -52,23 +52,23 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.sharedInstance.currentGameState == GameState.inGame)
-        {
-            if (GetIsTouchingTheGround() && InputManager.sharedInstance.GetJumpButton() && !this.attackAnimationStatus)
-                Jump();
+        if (GameManager.sharedInstance.currentGameState != GameState.inGame)
+            return;
+        if (GetIsTouchingTheGround() && InputManager.sharedInstance.GetJumpButton() && !this.attackAnimationStatus)
+            Jump();
 
-            if (InputManager.sharedInstance.GetAttackButton())
-                Attack();
+        if (InputManager.sharedInstance.GetAttackButton())
+            Attack();
 
-            if (GetIsAttacking() && !GetIsTouchingTheGround())
-                this.blockedFlip = true;
-            else
-                this.blockedFlip = false;
+        if (GetIsAttacking() && !GetIsTouchingTheGround())
+            this.blockedFlip = true;
+        else
+            this.blockedFlip = false;
 
-            //Debug.Log($"BlockedFlip {this.blockedFlip}");
-            //Debug.Log(InputManager.sharedInstance.GetMovementY().y);
+        //Debug.Log($"BlockedFlip {this.blockedFlip}");
+        //Debug.Log(InputManager.sharedInstance.GetMovementY().y);
 
-        }
+
     }
 
     private void InitialConfiguration()

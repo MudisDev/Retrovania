@@ -6,6 +6,8 @@ public class CameraFollow : MonoBehaviour
 {
     public static CameraFollow sharedInstance;
     [SerializeField] GameObject follow;
+    [SerializeField] GameObject min;
+    [SerializeField] GameObject max;
     //[SerializeField] Transform minPosition, maxPosition;
     private Vector2 minCameraPosition, maxCameraPosition;
 
@@ -28,10 +30,13 @@ public class CameraFollow : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        GameObject min = GameObject.Find("AxisMinCamera");
-        GameObject max = GameObject.Find("AxisMaxCamera");
+        /* GameObject min = GameObject.Find("AxisMinCamera");
+        GameObject max = GameObject.Find("AxisMaxCamera"); */
         if (!min || !max)
-            Debug.LogWarning("Limites de mainCamera nulos");
+        {   
+            int scene = ChangeScene.sharedInstance.GetNumberCurrentScene();
+            Debug.LogWarning("Limites de mainCamera nulos en la escena " + scene);
+        }
         else
         {
             this.minCameraPosition = min.transform.position;
@@ -42,6 +47,11 @@ public class CameraFollow : MonoBehaviour
             Mathf.Clamp(follow.transform.position.x, minCameraPosition.x, maxCameraPosition.x),
             Mathf.Clamp(follow.transform.position.y, minCameraPosition.y, maxCameraPosition.y),
             transform.position.z);
+
+        if (!this.follow)
+        {
+            Debug.LogWarning("Follow en CameraFollow nulo");
+        }
     }
 
     // Update is called once per frame
